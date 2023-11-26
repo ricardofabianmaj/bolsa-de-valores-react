@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import {Tabela, Add} from './Tabela/index';
 
-function Adicionar({ Add }) {
+function Adicionar({ setNewData }) {
     const [nome, setNome] = useState('');
     const [investimento, setInvestimento] = useState('');
     const [tempo, setTempo] = useState('');
@@ -37,7 +36,7 @@ function Adicionar({ Add }) {
                 onChange={(event) => setTempo(event.target.value)}
             />
 
-            <button onClick={() => Tabela.Add(novo)}>Adicionar</button>
+            <button onClick={() => setNewData(novo)}>Adicionar</button>
         </div>
     );
 }

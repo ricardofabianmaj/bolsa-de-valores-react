@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './tabela.module.css';
 import dados from '../dados';
 import Adicionar from '../adicionar/Adicionar';
 
 function Tabela() {
   const [clientes, setClientes] = useState(dados);
+  const [newData, setNewData] = useState(null);
+  
+  const handleNewData = () => {
+      setClientes([...clientes, newData]);
+  };
 
-  function Add(Novo) {
-    const novoCliente = Novo;
-    setClientes([...clientes, novoCliente]);
-  }
+  useEffect(() => {
+    if(newData !== null){
+      handleNewData()
+    }
+  }, [newData])
+  
 
   return (
     <div>
@@ -23,20 +30,20 @@ function Tabela() {
           </tr>
         </thead>
         <tbody>
-          {clientes.map((item, index) => (
-            <tr key={index}>
-              <td>{item.cliente.nome}</td>
-              <td>R${Number(item.cliente.Investimento).toFixed(2)}</td>
-              <td>{item.cliente.Tempo}</td>
-              <td>R${Number(item.cliente.Investimento * item.cliente.Tempo).toFixed(2)}</td>
-            </tr>
-          ))}
+        {clientes.map((item, index) => (
+        <tr key={index}>
+          <td>{item && item.cliente && item.cliente.nome}</td>
+          <td>R${item && item.cliente && Number(item.cliente.Investimento).toFixed(2)}</td>
+          <td>{item && item.cliente && item.cliente.Tempo}</td>
+          <td>R${item && item.cliente && Number(item.cliente.Investimento * item.cliente.Tempo).toFixed(2)}</td>
+        </tr>
+        ))}
         </tbody>
       </table>
 
-      <Adicionar Add={Add} />
+      <Adicionar setNewData={setNewData} />
     </div>
   );
 }
 
-export default { Tabela, Add};
+export default Tabela;
