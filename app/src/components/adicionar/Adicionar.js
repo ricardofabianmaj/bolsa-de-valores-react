@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import {Tabela, Add} from './Tabela/index';
 
-function Adicionar({ Add }) {
+function Adicionar({ setNewData }) {
     const [nome, setNome] = useState('');
     const [investimento, setInvestimento] = useState('');
     const [tempo, setTempo] = useState('');
@@ -14,12 +13,20 @@ function Adicionar({ Add }) {
         }
     };
 
+    const handleSendAndClearFields = () => {
+        setNewData(novo)
+        setNome('')
+        setInvestimento('')
+        setTempo('')
+    }
+
     return (
         <div>
             <label htmlFor="nome">Nome:</label>
             <input
                 id="nome"
                 name="nome"
+                value={nome}
                 onChange={(event) => setNome(event.target.value)}
             />
 
@@ -27,6 +34,7 @@ function Adicionar({ Add }) {
             <input
                 id="investimento"
                 name="investimento"
+                value={investimento}
                 onChange={(event) => setInvestimento(event.target.value)}
             />
 
@@ -34,10 +42,11 @@ function Adicionar({ Add }) {
             <input
                 id="tempo"
                 name="tempo"
+                value={tempo}
                 onChange={(event) => setTempo(event.target.value)}
             />
 
-            <button onClick={() => Tabela.Add(novo)}>Adicionar</button>
+            <button onClick={() => handleSendAndClearFields()}>Adicionar</button>
         </div>
     );
 }
