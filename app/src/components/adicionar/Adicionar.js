@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './adicionar.module.css'
 
 function Adicionar({ setNewData }) {
     const [nome, setNome] = useState('');
