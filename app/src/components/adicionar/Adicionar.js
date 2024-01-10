@@ -14,7 +14,7 @@ function Adicionar({ setNewData }) {
         }
     };
 
-    const handleSendAndClearFields = () => {
+    function handleSendAndClearFields(){
         setNewData(novo)
         setNome('')
         setInvestimento('')
