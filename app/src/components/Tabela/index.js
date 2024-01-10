@@ -8,15 +8,14 @@ function Tabela() {
   const [newData, setNewData] = useState(null);
   
   const handleNewData = () => {
+    if (newData !== null) {
       setClientes([...clientes, newData]);
+    }
   };
 
   useEffect(() => {
-    if(newData !== null){
-      handleNewData()
-    }
-  }, [newData])
-  
+    handleNewData();
+  }, [newData]);
 
   return (
     <div>
@@ -30,14 +29,14 @@ function Tabela() {
           </tr>
         </thead>
         <tbody>
-        {clientes.map((item, index) => (
-        <tr key={index}>
-          <td>{item && item.cliente && item.cliente.nome}</td>
-          <td>R${item && item.cliente && Number(item.cliente.Investimento).toFixed(2)}</td>
-          <td>{item && item.cliente && item.cliente.Tempo}</td>
-          <td>R${item && item.cliente && Number(item.cliente.Investimento * item.cliente.Tempo).toFixed(2)}</td>
-        </tr>
-        ))}
+          {clientes.map((item, index) => (
+            <tr key={index}>
+              <td>{item && item.cliente && item.cliente.nome}</td>
+              <td>R${item && item.cliente && Number(item.cliente.Investimento).toFixed(2)}</td>
+              <td>{item && item.cliente && item.cliente.Tempo}</td>
+              <td>R${item && item.cliente && Number(item.cliente.Investimento * item.cliente.Tempo).toFixed(2)}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
 
